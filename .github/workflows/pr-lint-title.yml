@@ -1,0 +1,24 @@
+name: pr-lint-title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  pr_lint_title:
+    runs-on: [self-hosted]
+    steps:
+      - uses: amannn/action-semantic-pull-request@v3.4.2
+        with:
+          # scope is not compulsory
+          requireScope: false
+          # ensure the "subject" doesn't start with an uppercase character
+          subjectPattern: ^(?![A-Z]).+$
+          subjectPatternError: |
+            The subject "{subject}" found in the pull request title "{title}"
+            didn't match the configured pattern. Please ensure that the subject
+            doesn't start with an uppercase character.
+          # for single-commit prs
+          validateSingleCommit: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_ENTERPRISE_PAT }}
