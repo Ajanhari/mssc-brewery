@@ -21,4 +21,4 @@ jobs:
           # for single-commit prs
           validateSingleCommit: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_ENTERPRISE_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
